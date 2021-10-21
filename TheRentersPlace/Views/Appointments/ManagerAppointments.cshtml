@@ -1,0 +1,61 @@
+﻿@model TheRentersPlace.Models.Manager
+
+@{
+    ViewBag.Title = "Appointments";
+}
+
+<h2>Your Appointments</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Date
+        </th>
+        <th>
+            Time
+        </th>
+        <th>
+            Purpose
+        </th>
+        <th>
+            Note
+        </th>
+        <th>
+            Adress
+        </th>
+        <th>
+            Tenant
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Appointments)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Purpose)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Appartment.CivicAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tenant.Username)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {  AppartmentId = item.AppartmentId, TenantId = item.TenantId, ManagerId = item.ManagerId }) |
+                @Html.ActionLink("Details", "Details", new { AppartmentId = item.AppartmentId, TenantId = item.TenantId, ManagerId = item.ManagerId }) |
+                @Html.ActionLink("Cancel", "Delete", new { AppartmentId = item.AppartmentId, TenantId = item.TenantId, ManagerId = item.ManagerId })
+            </td>
+        </tr>
+    }
+
+</table>

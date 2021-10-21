@@ -1,0 +1,42 @@
+﻿@model IEnumerable<TheRentersPlace.Models.Message>
+
+@{
+    ViewBag.Title = "Messages";
+}
+
+<h2>List of all messages</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            From:
+        </th>
+        <th>
+            To:
+        </th>
+        <th>
+            Content
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SenderUsername)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReceiverUsername)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Content)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MessageId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MessageId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MessageId })
+        </td>
+    </tr>
+}
+
+</table>

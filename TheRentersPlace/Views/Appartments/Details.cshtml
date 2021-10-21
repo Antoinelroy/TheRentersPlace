@@ -1,0 +1,52 @@
+﻿@model TheRentersPlace.Models.Appartment
+
+@{
+    ViewBag.Title = "Details";
+}
+
+        
+<div class="jumbotron" style="padding-top:30px">
+    <h2 class="text-center" style="margin-bottom:15px;">Details of the appartment</h2>
+    <div style="height: 500px">
+        <div style="height: 100%;">
+            <img src="../@Model.PictureURL" alt="Appartment picture" style="width:100%; height:100%; object-fit: cover;" />
+        </div>
+    </div>
+    <div>
+        <p style="margin-top:2%"><b>Adress: </b>@Model.CivicAddress</p>
+        <p><b>City: </b>@Model.City</p>
+        <p><b>Province: </b>@Model.Province</p>
+        <p><b>Number of bedrooms: </b>@Model.NoOfBedrooms</p>
+        <p><b>Type: </b>@Model.Type</p>
+        <p><b>Price per month: </b>@Model.Price$</p>
+        <p><b>Status: </b>@Model.Status</p>
+    </div>
+    <div class="btn-group" style="display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 2%;
+        padding-right:5px;">
+        @if (Session["TenantUsername"] != null)
+        {
+            @Html.ActionLink("Write a message to manager", "TenantCreate", "Messages", new { ManagerId = Model.Manager.ManagerId, ManagerUsername = Model.Manager.Username }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Book an appointment", "Create", "Appointments", new { AppartmentId = Model.AppartmentId, ManagerId = Model.Manager.ManagerId, TenantId = Session["TenantId"] }, new { @class = "btn btn-primary" })
+        }
+        @if (Session["ManagerUsername"] != null)
+        {
+            @Html.ActionLink("Edit appartment", "Edit", "Appartments", new { id = Model.AppartmentId }, new { @class = "btn btn-primary" });
+        }
+
+    </div>
+
+</div>
+  
+
+    
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

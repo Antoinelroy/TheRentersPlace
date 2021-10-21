@@ -1,0 +1,40 @@
+﻿@model IEnumerable<TheRentersPlace.Models.Appartment>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (Session["OwnerUsername"] != null)
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
+@if (Model.Count() == 0)
+{
+    <h4 class="alert-danger">Could not find any appartments with this filter.</h4>
+}
+else
+{
+    <h4>Here is a list of available appartments: </h4>
+}
+<div class="card-columns">
+
+    @foreach (var item in Model)
+    {
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="@item.PictureURL" alt="Card image cap">
+            <div class="card-body">
+                <p class="card-text"><span><b>Adress: </b></span>@item.CivicAddress</p>
+                <p class="card-text"><span><b>City: </b></span>@item.City</p>
+                <p class="card-text"><span><b>Number of bedrooms: </b></span>@item.NoOfBedrooms</p>
+                <p class="card-text"><span><b>Type: </b></span>@item.Type</p>
+                <p class="card-text"><span><b>Price per month: </b></span>@item.Price</p>
+                <p class="card-text"><span><b>Status: </b></span>@item.Status</p>
+                @Html.ActionLink("Details", "Details", new { id = item.AppartmentId }, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    }
+
+
+</div>

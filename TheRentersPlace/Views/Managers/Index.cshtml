@@ -1,0 +1,23 @@
+﻿@model TheRentersPlace.Models.Manager
+
+<h2>Hello @Session["ManagerUsername"]</h2>
+<h4>List of your appartments: </h4>
+
+<div class="card-columns">
+    @foreach (var item in Model.Appartments)
+    {
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="@item.PictureURL" alt="Card image cap">
+            <div class="card-body">
+                <p class="card-text"><span><b>Adress: </b></span>@item.CivicAddress</p>
+                <p class="card-text"><span><b>City: </b></span>@item.City</p>
+                <p class="card-text"><span><b>Number of bedrooms: </b></span>@item.NoOfBedrooms</p>
+                <p class="card-text"><span><b>Type: </b></span>@item.Type</p>
+                <p class="card-text"><span><b>Price per month: </b></span>@item.Price</p>
+                <p class="card-text"><span><b>Status: </b></span>@item.Status</p>
+                @Html.ActionLink("Details", "Details", "Appartments", new { id = item.AppartmentId }, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    }
+</div>
+@Html.ActionLink("Create New", "Create", "Appartments", null, new { @class = "btn btn-primary" })

@@ -1,0 +1,60 @@
+﻿@model TheRentersPlace.Models.Tenant
+
+@{
+    ViewBag.Title = "Appointments";
+}
+
+<h2>Your Appointments</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Date
+        </th>
+        <th>
+            Time
+        </th>
+        <th>
+            Purpose
+        </th>
+        <th>
+            Note
+        </th>
+        <th>
+            Adress
+        </th>
+        <th>
+            Manager
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Appointments)
+    {
+        <tr>
+            <td>
+                @item.Date.Year-@item.Date.Month-@item.Date.Day
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Purpose)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Appartment.CivicAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Manager.Username)
+            </td>
+            <td class="col-lg-6">
+                @Html.ActionLink("Write a message to this manager", "TenantCreate", "Messages", new { ManagerId = item.Manager.ManagerId, ManagerUsername = item.Manager.Username }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Cancel this appointment", "Delete", "Appointments", new { AppartmentId = item.AppartmentId, TenantId = item.TenantId, ManagerId = item.ManagerId }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+    }
+
+</table>

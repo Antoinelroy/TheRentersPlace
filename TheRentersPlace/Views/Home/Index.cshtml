@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewData["Title"] = "Home Page";
+   
+}
+<h1 style="text-align:center;">Welcome to The Renter's Place</h1>
+<div class="jumbotron align-items-center">
+    <div class="btn-group" style="display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 2%;">
+        <button id="tenantBtn" class="btn btn-primary">Log in as tenant</button>
+        <button id="managerBtn" class="btn btn-outline-primary">Login as Manager</button>
+    </div>
+
+    <div class="card" style="width: 50%; margin-left:auto; margin-right:auto">
+        <div class="card-body" id="LoginForm">
+
+
+        </div>
+    </div>
+</div>
+<div class="">
+    <p>Are you an owner? click <span>@Html.ActionLink("Here", "Login", "Owners")</span> to login.</p>
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#LoginForm").load('@Url.Action("Login", "Tenants")');
+            var tenantBtn = document.getElementById("tenantBtn");
+            var managerBtn = document.getElementById("managerBtn");
+            $("#tenantBtn").click(function () {
+                $("#LoginForm").load('@Url.Action("Login", "Tenants")');
+                managerBtn.className = "btn btn-outline-primary";
+                tenantBtn.className = "btn btn-primary";
+            });
+            $("#managerBtn").click(function () {
+                managerBtn.className = "btn btn-primary";
+                tenantBtn.className = "btn btn-outline-primary";
+                $("#LoginForm").load('@Url.Action("Login", "Managers")');
+
+            })
+        });
+    </script>
+}
+
+
+
+
+

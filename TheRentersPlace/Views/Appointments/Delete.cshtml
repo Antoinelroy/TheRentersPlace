@@ -1,0 +1,100 @@
+﻿@model TheRentersPlace.Models.Appointment
+
+@{
+    ViewBag.Title = "Cancel appointment";
+}
+
+
+<h3>Are you sure you want to cancel this?</h3>
+<div>
+    <h4>Appointment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Purpose)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Purpose)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+
+        <dt>
+            Civic Adress
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Appartment.CivicAddress)
+        </dd>
+        @if (Session["TenantId"] != null)
+        {
+            <dt>
+                Manager
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Manager.Username)
+            </dd>
+        }
+        else if (Session["ManagerId"] != null)
+        {
+            <dt>
+                Tenant
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Tenant.Username)
+            </dd>
+        }
+
+
+
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-primary" /> |
+            <a href="javascript:void(0);" id="backLink">Go Back</a>
+        </div>
+    }
+</div>
+
+@section Scripts
+    {
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', '#backLink', function () {
+                history.go(-1);
+            });
+        });
+    </script>
+
+}
+

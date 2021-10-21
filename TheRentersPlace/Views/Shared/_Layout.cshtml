@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Renter's Place</title>
+    
+    @Styles.Render("~/Content/bootstrap.min.css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                @Html.ActionLink("The Renter's Place", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+            
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        @if (Session["OwnerUsername"] != null)
+                        {
+                            <li class="nav-item">@Html.ActionLink("Tenants", "ListAllTenants", "Tenants", new { area = "" }, new { @class = "nav-link text-dark" })</li>
+                            <li class="nav-item">@Html.ActionLink("Managers", "ListAllManagers", "Managers", new { area = "" }, new { @class = "nav-link text-dark" })</li>
+                            <li class="nav-item">@Html.ActionLink("Appartments", "Index", "Appartments", new { area = "" }, new { @class = "nav-link text-dark" })</li>
+                            <li class="nav-item">@Html.ActionLink("Appointments", "Index", "Appointments", new { area = "" }, new { @class = "nav-link text-dark" })</li>
+                            <li class="nav-item">@Html.ActionLink("Messages", "Index", "Messages", new { area = "" }, new { @class = "nav-link text-dark" })</li>
+                        }
+                        @if (Session["TenantUsername"] != null)
+                        {
+                            <li class="nav-item">@Html.ActionLink("Messages", "TenantMessages", "Messages", new { area = "" }, new { @class = "nav-link text-dark" })</li>
+                            <li class="nav-item">@Html.ActionLink("Appointments", "TenantAppointments", "Appointments", new { area = "" }, new { @class = "nav-link text-dark" })</li>
+                        }
+                        @if (Session["ManagerUsername"] != null)
+                        {
+                            <li class="nav-item">@Html.ActionLink("Messages", "ManagerMessages", "Messages", new { area = "" }, new { @class = "nav-link text-dark" })</li>
+                            <li class="nav-item">@Html.ActionLink("Appointments", "ManagerAppointments", "Appointments", new { area = "" }, new { @class = "nav-link text-dark" })</li>
+                        }
+                    </ul>
+                    @if (Session["OwnerUsername"] != null || Session["TenantUsername"] != null || Session["ManagerUsername"] != null)
+                    {
+                        <ul class="navbar-nav">
+                            <li class="navbar-nav navbar-right">@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "nav-link text-dark" })</li>
+                        </ul>
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - The Renter's Place</p>
+        </footer>
+    </div>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+</body>
+</html>

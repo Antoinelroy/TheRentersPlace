@@ -1,0 +1,52 @@
+﻿@model IEnumerable<TheRentersPlace.Models.Appartment>
+
+@{
+    ViewBag.Title = "index";
+}
+
+<h2>Hello @Session["TenantUsername"]</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <p style="display:inline-block">You can filter appartments here:</p>
+        <div class="form-vertical">
+            @Html.DropDownList("Filter", null, new { @class = "form-control col-sm-4 d-inline-block", @id = "filterList" })
+            <input type="text" class="form-control col-sm-2 d-inline-block" id="search" />
+            <input id="searchBtn" type="button" value="Search" class="btn btn-primary" />
+            <input id="clearBtn" type="button" value="Clear filters" class="btn btn-primary" />
+        </div>
+        <hr />
+    </div>
+}
+
+<div class="container">
+    <div id="appts">
+
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+            $(document).ready(function () {
+                $("#appts").load('@Url.Action("AppartmentList", "Appartments")');
+
+                $("#clearBtn").on('click', function () {
+                     $("#appts").load('@Url.Action("AppartmentList", "Appartments")');
+                })
+
+                $("#searchBtn").on('click', function () {
+                    var filterList = document.getElementById("filterList");
+                    var filter = filterList.options[filterList.selectedIndex].text;
+                    var searchInput = document.getElementById("search").value;
+                    $("#appts").load("@Url.Action("AppartmentListWithFilter", "Appartments")",
+                        { 'Filter': filter, 'Search': searchInput });
+                });
+
+            });
+    </script>
+}

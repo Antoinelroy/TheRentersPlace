@@ -1,0 +1,8 @@
+﻿<h2>Welcome @Session["OwnerUsername"]</h2>
+
+<h4>Here's what you can do:</h4>
+@Html.ActionLink("List all Tenants", "ListAllTenants", "Tenants", new { area = "" }, new { @class = "btn btn-primary" })
+@Html.ActionLink("List all Managers", "ListAllManagers", "Managers", new { area = "" }, new { @class = "btn btn-primary" })
+@Html.ActionLink("List all Appartments", "Index", "Appartments", new { area = "" }, new { @class = "btn btn-primary" })
+@Html.ActionLink("List all Appointments", "Index", "Appointments", new { area = "" }, new { @class = "btn btn-primary" })
+@Html.ActionLink("List all messages", "Index", "Messages", new { area = "" }, new { @class = "btn btn-primary" })

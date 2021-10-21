@@ -1,0 +1,80 @@
+﻿@model TheRentersPlace.Models.Appointment
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Appointment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Purpose)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Purpose)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Appartment.CivicAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Appartment.CivicAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Manager.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Manager.Username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tenant.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tenant.Username)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @if (Session["ManagerId"] != null)
+    {
+        @Html.ActionLink("Back to List", "ManagerAppointments")
+    }
+    else
+    {
+        @Html.ActionLink("Back to List", "Index")
+    }
+</p>
